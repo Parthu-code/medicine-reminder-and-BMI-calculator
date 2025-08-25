@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediReminder - Medication & Health Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo">
+                <i class="fas fa-pills"></i> MediReminder
+            </h1>
+            <div class="nav-menu">
+                <a href="#" class="nav-link active" data-page="reminder">
+                    <i class="fas fa-bell"></i> Reminders
+                </a>
+                <a href="#" class="nav-link" data-page="bmi">
+                    <i class="fas fa-calculator"></i> BMI Calculator
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Reminder Page -->
+        <div id="reminder-page" class="page active">
+            <div class="container">
+                <h2><i class="fas fa-bell"></i> Medication Reminders</h2>
+                
+                <div class="reminder-form">
+                    <h3>Add New Reminder</h3>
+                    <form id="reminderForm">
+                        <div class="form-group">
+                            <label for="medicationName">Medication Name:</label>
+                            <input type="text" id="medicationName" required placeholder="e.g., Aspirin, Vitamin D">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dosage">Dosage:</label>
+                            <input type="text" id="dosage" required placeholder="e.g., 1 tablet, 500mg">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reminderTime">Reminder Time:</label>
+                            <input type="time" id="reminderTime" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="frequency">Frequency:</label>
+                            <select id="frequency" required>
+                                <option value="daily">Daily</option>
+                                <option value="twice-daily">Twice Daily</option>
+                                <option value="three-times">Three Times Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes">Notes (Optional):</label>
+                            <textarea id="notes" placeholder="Any additional notes..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add Reminder
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="reminders-list">
+                    <h3>Active Reminders</h3>
+                    <div id="remindersList" class="reminders-container">
+                        <!-- Reminders will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BMI Calculator Page -->
+        <div id="bmi-page" class="page">
+            <div class="container">
+                <h2><i class="fas fa-calculator"></i> BMI Calculator</h2>
+                
+                <div class="bmi-calculator">
+                    <div class="bmi-form">
+                        <h3>Calculate Your BMI</h3>
+                        <form id="bmiForm">
+                            <div class="form-group">
+                                <label for="weight">Weight (kg):</label>
+                                <input type="number" id="weight" step="0.1" required placeholder="e.g., 70.5">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="height">Height (cm):</label>
+                                <input type="number" id="height" required placeholder="e.g., 175">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="age">Age:</label>
+                                <input type="number" id="age" required placeholder="e.g., 30">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-calculator"></i> Calculate BMI
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="bmi-result" id="bmiResult" style="display: none;">
+                        <h3>Your BMI Result</h3>
+                        <div class="bmi-value">
+                            <span id="bmiNumber">0</span>
+                            <span class="bmi-unit">kg/m²</span>
+                        </div>
+                        <div class="bmi-category" id="bmiCategory">Normal</div>
+                        <div class="bmi-description" id="bmiDescription">
+                            Your BMI indicates a healthy weight range.
+                        </div>
+                        <div class="bmi-chart">
+                            <div class="chart-bar underweight">
+                                <span>Underweight</span>
+                                <small>&lt; 18.5</small>
+                            </div>
+                            <div class="chart-bar normal">
+                                <span>Normal</span>
+                                <small>18.5 - 24.9</small>
+                            </div>
+                            <div class="chart-bar overweight">
+                                <span>Overweight</span>
+                                <small>25.0 - 29.9</small>
+                            </div>
+                            <div class="chart-bar obese">
+                                <span>Obese</span>
+                                <small>≥ 30.0</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Notification Permission Modal -->
+    <div id="notificationModal" class="modal">
+        <div class="modal-content">
+            <h3><i class="fas fa-bell"></i> Enable Notifications</h3>
+            <p>To receive medication reminders, please allow notifications for this website.</p>
+            <button id="enableNotifications" class="btn btn-primary">
+                <i class="fas fa-check"></i> Enable Notifications
+            </button>
+            <button id="skipNotifications" class="btn btn-secondary">
+                Skip for now
+            </button>
+        </div>
+    </div>
+
+    <!-- Audio for alarm -->
+    <audio id="alarmSound" preload="auto">
+        <source src="Creepy Samsung Alarm in home.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
